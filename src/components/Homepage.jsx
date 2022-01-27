@@ -17,7 +17,7 @@ const Homepage = () => {
     const {
         data,
         isFetching
-    } = useGetCryptosQuery();
+    } = useGetCryptosQuery(10);
 
     if (isFetching) return 'Loading...';
 
@@ -57,4 +57,3 @@ const Homepage = () => {
 
 export default Homepage;
 
-// todo 56min

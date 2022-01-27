@@ -53,4 +53,3 @@ const App = () => {
 
 export default App;
 
-//TODO 33MIN HOME PAGE
