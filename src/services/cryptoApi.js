@@ -7,6 +7,12 @@ const cryptoApiHeaders = {
 
 const baseUrl = 'https://coinranking1.p.rapidapi.com';
 
+// const cryptoApiHeaders = {
+//     'x-access-token':'coinrankingeceecdd31e33c1533e47c89fa69aafcfbe52e1fe0b0bcbe5'
+// };
+// const baseUrl = 'https://api.coinranking.com/v2/migration';
+
+
 const createRequest = (url) => ({url, headers: cryptoApiHeaders})
 
 
@@ -23,9 +29,8 @@ export const cryptoApi = createApi({
             query: (coinId) => createRequest(`/coin/${coinId}`),
         }),
 
-        // Note: Change the coin price history endpoint from this - `coin/${coinId}/history/${timeperiod} to this - `coin/${coinId}/history?timeperiod=${timeperiod}`
         getCryptoHistory: builder.query({
-            query: ({coinId, timeperiod}) => createRequest(`coin/${coinId}/history?timeperiod=${timeperiod}`),
+            query: ({coinId, timePeriod}) => createRequest(`coin/${coinId}/history?timeperiod=${timePeriod}`),
         }),
 
         // Note: To access this endpoint you need premium plan

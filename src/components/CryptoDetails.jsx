@@ -17,16 +17,16 @@ import {
 
 import {useGetCryptoDetailsQuery, useGetCryptoHistoryQuery} from '../services/cryptoApi';
 import Loader from './Loader';
-// import LineChart from './LineChart';
+import LineChart from './LineChart';
 
 const {Title, Text} = Typography;
 const {Option} = Select;
 
 const CryptoDetails = () => {
     const {coinId} = useParams();
-    const [timeperiod, setTimeperiod] = useState('7d');
+    const [timePeriod, setTimePeriod] = useState('7d');
     const {data, isFetching} = useGetCryptoDetailsQuery(coinId);
-    const {data: coinHistory} = useGetCryptoHistoryQuery({coinId, timeperiod});
+    const {data: coinHistory} = useGetCryptoHistoryQuery({coinId, timePeriod});
     const cryptoDetails = data?.data?.coin;
 
     if (isFetching) return <Loader/>;
@@ -93,13 +93,18 @@ const CryptoDetails = () => {
                 </p>
             </Col>
             <Select defaultValue="7d" className="select-timeperiod" placeholder="Select Time Period"
-                    onChange={(value) => setTimeperiod(value)}
+                    onChange={(value) => setTimePeriod(value)}
             >
                 {time.map((date) => <Option key={date}>{date} </Option>)}
 
 
             </Select>
+
             {/* -------- Line Chart ---------- */}
+            <LineChart coinHistory={coinHistory}
+                       currentPrice={millify(cryptoDetails.price)}
+                       coinName={cryptoDetails.name}
+                       timePeriod={timePeriod}/>
 
 
             <Col className="stats-container">
